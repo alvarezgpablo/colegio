@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadisticas economicas</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+    
+    <title>Document</title>
+</head>
+<body>
+    <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=f30bc33f-b9b7-4df4-823d-1593878aa00d&autoAuth=true&ctid=cf263038-f11c-49d2-9183-556a34b747e2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+    <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=1c5a36c0-4f66-4d1d-b721-8d72d6e92a90&autoAuth=true&ctid=cf263038-f11c-49d2-9183-556a34b747e2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+    <div class="inputGroup inputGroup3">
+        <a href="images/informe.pdf" download="Reporte2Mayo2010">
+            Descargar Informe
+            </a>
+    </div>
+    <main>
+
+        <h1>ESTADISTICAS</h1>
+        <p>Visualización de estadísticas anuales</p>
+
+        <hr>
+
+        <h2 class="loading">Esperando respuesta de la API...</h2>
+
+        
+
+        <section class="cols-1">
+            <figure>
+                <h1>Bolivia</h1>
+                <h3>Crecimiento Economico</h3>
+                <canvas id="chart6"></canvas>
+            </figure>
+        </section>
+
+        
+        <script>
+            window.onload = function() {
+            
+            var dataPoints = [];
+            
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Exportaciones"
+                },
+                axisY: {
+                    title: "Mill Dolares",
+                    titleFontSize: 24,
+                    includeZero: true
+                },
+                data: [{
+                    type: "column",
+                    yValueFormatString: "#,### Units",
+                    dataPoints: dataPoints
+                }]
+            });
+            
+            function addData(data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataPoints.push({
+                        x: new Date(data[i].date),
+                        y: data[i].units
+                    });
+                }
+                chart.render();
+            
+            }
+            
+            $.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales-data.json", addData);
+            
+            }
+            </script>
+            </head>
+            <body>
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    </main>
+
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    <!-- Styles for charts -->
+    <script src="js/chartStyles.js"></script>
+
+    <!-- DCharts development -->
+    <script src="js/script.js"></script>
+</body>
+</html>
